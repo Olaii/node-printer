@@ -25,10 +25,14 @@
         ['OS=="win"', {
           'sources': [ 'src/node_printer_win.cc' ],
         }],
-        ['OS=="mac" or OS=="linux"', {
+        ['OS=="mac"', {
           'sources': [ 'src/node_printer_posix.cc' ],
           'link_settings': { 'libraries': [ '-lcups' ] }
         }],
+        ['OS=="linux"', {
+          'sources': [ 'src/node_printer_posix.cc' ],
+          'link_settings': { 'libraries': [ '-lcups' ] }
+        }]
       ],
       'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],

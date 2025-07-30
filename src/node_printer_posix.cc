@@ -91,10 +91,32 @@ MY_NODE_MODULE_CALLBACK(getPrinters)
 MY_NODE_MODULE_CALLBACK(getDefaultPrinterName)
 {
     MY_NODE_MODULE_HANDLESCOPE;
-    const char* default_printer = cupsGetDefault2(NULL);
-    if (default_printer) {
-        MY_NODE_MODULE_RETURN_VALUE(Napi::String::New(env, default_printer));
+
+    // Using cupsGetDests is a more modern and reliable way to find the default printer,
+    // especially on newer versions of macOS where cupsGetDefault might be deprecated or behave differently.
+    cups_dest_t *dests;
+    int num_dests = cupsGetDests(&dests);
+    const char* default_printer_name = NULL;
+
+    if (num_dests > 0) {
+        for (int i = 0; i < num_dests; i++) {
+            if (dests[i].is_default) {
+                default_printer_name = dests[i].name;
+                break; // Found it
+            }
+        }
     }
+
+    if (default_printer_name) {
+        Napi::String result = Napi::String::New(env, default_printer_name);
+        cupsFreeDests(num_dests, dests); // Free the memory allocated by cupsGetDests
+        MY_NODE_MODULE_RETURN_VALUE(result);
+    }
+
+    if (num_dests > 0) {
+        cupsFreeDests(num_dests, dests);
+    }
+
     MY_NODE_MODULE_RETURN_VALUE(Napi::String::New(env, ""));
 }
 
