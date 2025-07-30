@@ -75,6 +75,7 @@ See examples
 * Thiago Lugli, @thiagoelg
 * Eko Eryanto, @ekoeryanto
 * Sudheer Gupta, @susheer
+* Yaikhomba Ningthemcha, @yaikhomba
 
 ### Project History:
 
@@ -108,5 +109,8 @@ This project is licensed under the MIT License.
 * CUPS printer
 * print job
 * printer driver
+* Mac OS printer
+* Raspberry PI printer
+
 
 ---
