@@ -2,7 +2,12 @@
 
 **No recompilation required when upgrading Node.js versions, thanks to N-API!** 🎉
 
-Native bind printers on Windows OS, Nac OS and Linux from Node.js, Electron, and node-webkit.
+Native bind printers on Windows, Mac OS, and Linux from Node.js, Electron, and node-webkit.
+Supports following architectures:
+* Windows - ia32, x64, arm64
+* Mac - x64 & arm64 (Apple Silicon)
+* Linux - ia32, x64, arm7l, arm64
+
 
 [![npm version](https://badge.fury.io/js/%40addble%2Felectron-printer.svg)](https://badge.fury.io/js/%40addble%2Felectron-printer)
 [![CI & Prebuilds](https://github.com/addble/electron-printer/actions/workflows/ci.yml/badge.svg)](https://github.com/addble/electron-printer/actions/workflows/ci.yml)

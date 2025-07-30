@@ -2,7 +2,7 @@
   "name": "@addble/electron-printer",
   "description": "Node API (N-API) supported electron.s || node.js printer bindings",
   "homepage": "https://github.com/addble/electron-printer",
-  "version": "3.0.0",
+  "version": "3.0.0-RC1",
   "main": "./lib/index.js",
   "types": "types/index.d.ts",
   "dependencies": {

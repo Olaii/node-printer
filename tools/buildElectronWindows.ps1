@@ -12,7 +12,7 @@ param (
 # Stop script on first error
 $ErrorActionPreference = "Stop"
 
-Write-Host "Building Electron Version -> $Version for x64 and ia32"
+Write-Host "Building Electron Version -> $Version for x64, ia32, and arm64"
 
 # Build Electron Windows 64bit
 Write-Host "Building for x64..."
@@ -23,5 +23,9 @@ npx node-pre-gyp build package --runtime=electron --target=$Version --target_arc
 Write-Host "Building for ia32..."
 npx node-pre-gyp configure --target=$Version --arch=ia32 --dist-url=https://electronjs.org/headers --module_name=electron-printer --module_path=../lib/
 npx node-pre-gyp build package --runtime=electron --target=$Version --target_arch=ia32 --build-from-source
+
+Write-Host "Building for arm64..."
+npx node-pre-gyp configure --target=$Version --arch=arm64 --dist-url=https://electronjs.org/headers --module_name=electron-printer --module_path=../lib/
+npx node-pre-gyp build package --runtime=electron --target=$Version --target_arch=arm64 --build-from-source
 
 Write-Host "Done."

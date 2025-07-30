@@ -3,7 +3,7 @@ set -e # Exit immediately if a command exits with a non-zero status.
 
 if [ -z "$1" ]; then
   echo "Usage: $0 <release-version>"
-  echo "e.g.: $0 2.0.5"
+  echo "e.g.: $0 3.0.0"
   exit 1
 fi
 
@@ -27,6 +27,8 @@ declare -a electron_versions=(
   "31.2.1"
 )
 
+declare -a linux_archs=("x64" "ia32" "arm" "arm64")
+
 # remove old build directory
 rm -rf "$SOURCE_PATH/build"
 
@@ -34,21 +36,25 @@ rm -rf "$SOURCE_PATH/build"
 mkdir -p "$SOURCE_PATH/releases/$RELEASE_VERSION"
 
 for version in "${node_versions[@]}"; do
-  echo "Building for Node.js version: $version..."
-  npx node-pre-gyp configure --target=$version --module_name=electron-printer
-  npx node-pre-gyp build package --target=$version --target_arch=x64 --build-from-source
-  npx node-pre-gyp build package --target=$version --target_arch=ia32 --build-from-source
+  echo "Building for Node.js version: $version"
+  for arch in "${linux_archs[@]}"; do
+    echo "  Building for arch: $arch..."
+    npx node-pre-gyp configure --target=$version --arch=$arch --module_name=electron-printer
+    npx node-pre-gyp build package --target=$version --target_arch=$arch --build-from-source
+  done
   rsync -av "$SOURCE_PATH/build/stage/$PACKAGE_VERSION/" "$SOURCE_PATH/releases/$RELEASE_VERSION/" --remove-source-files
-  echo "Done"
+  echo "Done building for Node.js $version"
 done
 
 for version in "${electron_versions[@]}"; do
-  echo "Building for electron version: $version..."
-  npx node-pre-gyp configure --target=$version --dist-url=https://electronjs.org/headers --module_name=electron-printer
-  npx node-pre-gyp build package --target=$version --target_arch=x64 --runtime=electron --build-from-source
-  npx node-pre-gyp build package --target=$version --target_arch=ia32 --runtime=electron --build-from-source
+  echo "Building for Electron version: $version"
+  for arch in "${linux_archs[@]}"; do
+    echo "  Building for arch: $arch..."
+    npx node-pre-gyp configure --target=$version --arch=$arch --dist-url=https://electronjs.org/headers --module_name=electron-printer
+    npx node-pre-gyp build package --target=$version --target_arch=$arch --runtime=electron --build-from-source
+  done
   rsync -av "$SOURCE_PATH/build/stage/$PACKAGE_VERSION/" "$SOURCE_PATH/releases/$RELEASE_VERSION/" --remove-source-files
-  echo "Done"
+  echo "Done building for Electron $version"
 done
 
 echo "Finished successfully!"
