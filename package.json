@@ -11,7 +11,7 @@
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
     "rebuild": "node-gyp rebuild",
-    "prebuild": "node-pre-gyp prebuild --strip --all",
+    "prebuild": "node-pre-gyp prebuild",
     "release": "node-pre-gyp-github publish --release",
     "test": "node --test test/"
   },
@@ -43,6 +43,6 @@
   ],
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^2.0.0",
-    "node-pre-gyp-github": "github:Susheer/node-pre-gyp-github"
+    "@mapbox/node-pre-gyp-github": "^1.5.0"
   }
 }
