@@ -1,18 +1,18 @@
 {
-  "name": "@thesusheer/electron-printer",
+  "name": "@addble/electron-printer",
   "description": "Node API (N-API) supported electron.s || node.js printer bindings",
-  "homepage": "https://github.com/Susheer/electron-printer",
-  "version": "2.0.4",
+  "homepage": "https://github.com/addble/electron-printer",
+  "version": "3.0.0",
   "main": "./lib/index.js",
   "types": "types/index.d.ts",
   "dependencies": {
     "node-addon-api": "^8.1.0"
   },
   "scripts": {
-    "install": "prebuild-install || node-gyp rebuild",
+    "install": "node-pre-gyp install --fallback-to-build",
     "rebuild": "node-gyp rebuild",
-    "release": "node-pre-gyp-github publish --release --commitish main",
-    "electron-rebuild": "node-gyp rebuild --target_platform=win32 --target_arch=x64  --runtime=electron --target=32.2.0 --dist-url=https://electronjs.org/headers",
+    "prebuild": "node-pre-gyp prebuild --strip --all",
+    "release": "node-pre-gyp-github publish --release",
     "test": "node --test test/"
   },
 
@@ -28,27 +28,21 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Susheer/electron-printer.git"
+    "url": "https://github.com/addble/electron-printer.git"
   },
   "binary": {
     "module_name": "electron-printer",
     "module_path": "./lib/",
-    "host": "https://github.com/Susheer/electron-printer/releases/download/",
-    "remote_path": "v{version}",
-    "tag_path": "https://github.com/Susheer/electron-printer/releases/tag/v{version}"
+    "host": "https://github.com/addble/electron-printer/releases/download/",
+    "remote_path": "v{version}"
   },
   "licenses": [
     {
-      "type": "BSD"
+      "type": "MIT"
     }
   ],
   "devDependencies": {
     "@mapbox/node-pre-gyp": "^2.0.0",
-    "grunt": "^1.6.1",
-    "grunt-contrib-copy": "^1.0.0",
-    "grunt-contrib-jshint": "^3.2.0",
-    "grunt-node-gyp": "^5.0.0",
-    "grunt-shell": "^4.0.0",
     "node-pre-gyp-github": "github:Susheer/node-pre-gyp-github"
   }
 }

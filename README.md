@@ -1,16 +1,17 @@
-# @thesusheer/electron-printer
+# @addble/electron-printer
 
 **No recompilation required when upgrading Node.js versions, thanks to N-API!** 🎉
 
 Native bind printers on POSIX and Windows OS from Node.js, Electron, and node-webkit.
 
-!npm version !Prebuild Binaries and Publish
+[![npm version](https://badge.fury.io/js/%40addble%2Felectron-printer.svg)](https://badge.fury.io/js/%40addble%2Felectron-printer)
+[![CI & Prebuilds](https://github.com/addble/electron-printer/actions/workflows/ci.yml/badge.svg)](https://github.com/addble/electron-printer/actions/workflows/ci.yml)
 
 > Supports Node.js versions from 8.0.0 onwards, including the latest versions, thanks to the transition to N-API.
 
-> Prebuild and CI integration courtesy of @ekoeryanto in his FORK
+> Prebuild and CI integration courtesy of @ekoeryanto in his [FORK](https://github.com/ekoeryanto/node-printer)
 
-If you have a problem, ask a question on !Gitter or find/create a new Github issue
+If you have a problem, please find or create a new [GitHub issue](https://github.com/addble/electron-printer/issues).
 
 ___
 ### **Below is the original README**

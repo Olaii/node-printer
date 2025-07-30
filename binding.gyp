@@ -18,9 +18,17 @@
     {
       'target_name': '<(module_name)',
       'sources': [
-        # is like "ls -1 src/*.cc", but gyp does not support direct patterns on
-        # sources
-        '<!@(["python", "tools/getSourceFiles.py", "src", "cc"])'
+        'src/node_printer.cc',
+        'src/hello_world.cc'
+      ],
+      'conditions': [
+        ['OS=="win"', {
+          'sources': [ 'src/node_printer_win.cc' ],
+        }],
+        ['OS=="mac" or OS=="linux"', {
+          'sources': [ 'src/node_printer_posix.cc' ],
+          'link_settings': { 'libraries': [ '-lcups' ] }
+        }],
       ],
       'include_dirs': ["<!@(node -p \"require('node-addon-api').include\")"],
       'dependencies': ["<!(node -p \"require('node-addon-api').gyp\")"],

@@ -1,5 +1,5 @@
-#ifndef NODE_PRINTER_SRC_MACROS_H
-#define NODE_PRINTER_SRC_MACROS_H
+#ifndef ELECTRON_PRINTER_SRC_MACROS_H
+#define ELECTRON_PRINTER_SRC_MACROS_H
 #include <napi.h>
 
 
@@ -49,5 +49,4 @@ if ((job->key != NULL) && (*job->key != L'\0')) { \
     std::wstring var = (args)[(i)].As<Napi::String>().Utf16Value();
 
 
-#endif
-
+#endif // ELECTRON_PRINTER_SRC_MACROS_H

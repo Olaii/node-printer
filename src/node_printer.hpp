@@ -1,5 +1,5 @@
-#ifndef NODE_PRINTER_HPP
-#define NODE_PRINTER_HPP
+#ifndef ELECTRON_PRINTER_HPP
+#define ELECTRON_PRINTER_HPP
 #include "macros.hh"
 
 
@@ -74,4 +74,4 @@ protected:
 bool getStringOrBufferFromNapiValue(const Napi::Value& value, std::string& oData);
 
 
-#endif
+#endif // ELECTRON_PRINTER_HPP
