@@ -8,14 +8,12 @@ if [ -z "$VERSION" ]; then
   exit 1
 fi
 
-# Build Electron macOS x64
-echo "Building for Electron $VERSION on macOS x64..."
-node-pre-gyp configure --target=$VERSION --arch=x64 --dist-url=https://electronjs.org/headers --module_name=electron-printer --module_path=../lib/
-node-pre-gyp build package --runtime=electron --target=$VERSION --target_arch=x64 --build-from-source
+declare -a macos_archs=("x64" "arm64")
 
-# Build Electron macOS arm64 (for Apple Silicon)
-echo "Building for Electron $VERSION on macOS arm64..."
-node-pre-gyp configure --target=$VERSION --arch=arm64 --dist-url=https://electronjs.org/headers --module_name=electron-printer --module_path=../lib/
-node-pre-gyp build package --runtime=electron --target=$VERSION --target_arch=arm64 --build-from-source
+for arch in "${macos_archs[@]}"; do
+  echo "Building for Electron $VERSION on macOS $arch..."
+  npx node-pre-gyp configure --target=$VERSION --arch=$arch --dist-url=https://electronjs.org/headers --module_name=node-printer --module_path=../lib/
+  npx node-pre-gyp build package --runtime=electron --target=$VERSION --target_arch=$arch --build-from-source
+done
 
 echo "Done."

@@ -35,7 +35,7 @@ mkdir -p "$SOURCE_PATH/releases/$RELEASE_VERSION"
 
 for version in "${node_versions[@]}"; do
   echo "Building for Node.js version: $version..."
-  npx node-pre-gyp configure --target=$version --module_name=electron-printer
+  npx node-pre-gyp configure --target=$version --module_name=node-printer
   npx node-pre-gyp build package --target=$version --target_arch=x64 --build-from-source
   npx node-pre-gyp build package --target=$version --target_arch=arm64 --build-from-source
   rsync -av "$SOURCE_PATH/build/stage/$PACKAGE_VERSION/" "$SOURCE_PATH/releases/$RELEASE_VERSION/" --remove-source-files
@@ -44,7 +44,7 @@ done
 
 for version in "${electron_versions[@]}"; do
   echo "Building for Electron version: $version..."
-  npx node-pre-gyp configure --target=$version --dist-url=https://electronjs.org/headers --module_name=electron-printer
+  npx node-pre-gyp configure --target=$version --dist-url=https://electronjs.org/headers --module_name=node-printer
   npx node-pre-gyp build package --target=$version --target_arch=x64 --runtime=electron --build-from-source
   npx node-pre-gyp build package --target=$version --target_arch=arm64 --runtime=electron --build-from-source
   rsync -av "$SOURCE_PATH/build/stage/$PACKAGE_VERSION/" "$SOURCE_PATH/releases/$RELEASE_VERSION/" --remove-source-files

@@ -1,6 +1,6 @@
 {
   'variables': {
-    'module_name%': 'electron-printer',
+    'module_name%': 'node-printer',
     'module_path%': 'lib'
   },
   'targets': [

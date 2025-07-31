@@ -43,7 +43,7 @@ foreach ($version in $node_versions) {
   Write-Output "Building for node version: $version"
   foreach ($arch in $windows_archs) {
     Write-Output "  Building for arch: $arch..."
-    npx node-pre-gyp configure --target=$version --arch=$arch --module_name=electron-printer
+    npx node-pre-gyp configure --target=$version --arch=$arch --module_name=node-printer
     npx node-pre-gyp build package --target=$version --target_arch=$arch --build-from-source
   }
   Copy-Item -Force -Recurse "$SOURCE_PATH\..\build\stage\$PACKAGE_VERSION\*" -Destination "$SOURCE_PATH\..\releases\$RELEASE_VERSION"
@@ -55,7 +55,7 @@ foreach ($version in $electron_versions) {
   Write-Output "Building for Electron version: $version"
   foreach ($arch in $windows_archs) {
     Write-Output "  Building for arch: $arch..."
-    npx node-pre-gyp configure --target=$version --arch=$arch --dist-url=https://electronjs.org/headers --module_name=electron-printer
+    npx node-pre-gyp configure --target=$version --arch=$arch --dist-url=https://electronjs.org/headers --module_name=node-printer
     npx node-pre-gyp build package --target=$version --target_arch=$arch --runtime=electron --build-from-source
   }
   Copy-Item -Force -Recurse "$SOURCE_PATH\..\build\stage\$PACKAGE_VERSION\*" -Destination "$SOURCE_PATH\..\releases\$RELEASE_VERSION"

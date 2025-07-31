@@ -39,7 +39,7 @@ for version in "${node_versions[@]}"; do
   echo "Building for Node.js version: $version"
   for arch in "${linux_archs[@]}"; do
     echo "  Building for arch: $arch..."
-    npx node-pre-gyp configure --target=$version --arch=$arch --module_name=electron-printer
+    npx node-pre-gyp configure --target=$version --arch=$arch --module_name=node-printer
     npx node-pre-gyp build package --target=$version --target_arch=$arch --build-from-source
   done
   rsync -av "$SOURCE_PATH/build/stage/$PACKAGE_VERSION/" "$SOURCE_PATH/releases/$RELEASE_VERSION/" --remove-source-files
@@ -50,7 +50,7 @@ for version in "${electron_versions[@]}"; do
   echo "Building for Electron version: $version"
   for arch in "${linux_archs[@]}"; do
     echo "  Building for arch: $arch..."
-    npx node-pre-gyp configure --target=$version --arch=$arch --dist-url=https://electronjs.org/headers --module_name=electron-printer
+    npx node-pre-gyp configure --target=$version --arch=$arch --dist-url=https://electronjs.org/headers --module_name=node-printer
     npx node-pre-gyp build package --target=$version --target_arch=$arch --runtime=electron --build-from-source
   done
   rsync -av "$SOURCE_PATH/build/stage/$PACKAGE_VERSION/" "$SOURCE_PATH/releases/$RELEASE_VERSION/" --remove-source-files

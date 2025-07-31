@@ -1,4 +1,4 @@
-# @addble/electron-printer
+# @addble/node-printer
 
 **No recompilation required when upgrading Node.js versions, thanks to N-API!** 🎉
 
@@ -9,7 +9,7 @@ Supports following architectures:
 * Linux - ia32, x64, arm7l, arm64
 
 
-[![npm version](https://badge.fury.io/js/%40addble%2Felectron-printer.svg)](https://badge.fury.io/js/%40addble%2Felectron-printer)
+[![npm version](https://badge.fury.io/js/%40addble%2Fnode-printer.svg)](https://badge.fury.io/js/%40addble%2Fnode-printer)
 [![CI & Prebuilds](https://github.com/addble/electron-printer/actions/workflows/ci.yml/badge.svg)](https://github.com/addble/electron-printer/actions/workflows/ci.yml)
 
 > Supports Node.js versions from 8.0.0 onwards, including the latest versions, thanks to the transition to N-API.
@@ -101,6 +101,7 @@ This project is licensed under the MIT License.
 ### Keywords:
 
 * node-printer
+* nodejs-printer
 * printer
 * electron-printer
 * node-addon-api
