@@ -1,0 +1,100 @@
+name: CI & Prebuilds
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  prebuild:
+    name: Prebuild on ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.x'
+          cache: 'npm'
+
+      - name: Install Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo dpkg --add-architecture i386
+          sudo apt-get update -y -qq
+          sudo apt-get install -y g++-multilib gcc-multilib libcups2-dev libcups2-dev:i386 libc6-dev-i386 linux-libc-dev linux-libc-dev:i386
+
+      - name: Set up QEMU for ARM builds
+        if: runner.os == 'Linux'
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: arm,arm64
+
+      - name: Determine Architectures
+        id: archs
+        shell: bash
+        run: |
+          if [[ "${{ runner.os }}" == "Linux" ]]; then
+            echo "arch_list=ia32 x64 arm arm64" >> $GITHUB_OUTPUT
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            echo "arch_list=x64 arm64" >> $GITHUB_OUTPUT
+          elif [[ "${{ runner.os }}" == "Windows" ]]; then
+            echo "arch_list=ia32 x64 arm64" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Prebuilds
+        run: |
+          for arch in ${{ steps.archs.outputs.arch_list }}; do
+            npm run prebuild -- --strip --arch "$arch"
+          done
+        shell: bash
+
+      - name: Upload prebuilds artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: prebuilds-${{ matrix.os }}
+          path: prebuilds/
+
+  publish:
+    name: Publish Prebuilds
+    needs: prebuild
+    runs-on: ubuntu-latest
+    # The job-level `if` is removed. The job will now run on pull requests,
+    # but the steps inside will be skipped. This allows the job to report a
+    # "success" status, which is useful if it's a required check for merging.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        if: github.ref == 'refs/heads/main'
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          node-version: '18.x'
+      - name: Install dependencies
+        if: github.ref == 'refs/heads/main'
+        run: npm install
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        if: github.ref == 'refs/heads/main'
+        with:
+          path: prebuilds/
+          pattern: prebuilds-*
+          merge-multiple: true
+      - name: Publish to GitHub Releases
+        if: github.ref == 'refs/heads/main'
+        env:
+          NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.PREBUILD_TOKEN }}
+        run: npm run release

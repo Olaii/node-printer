@@ -1,20 +1,25 @@
-#
-# Usage: buildElectronWindows.ps1 <version>
-#
+<#
+.SYNOPSIS
+  Builds the native addon for a specific Electron version on Windows for x64 and ia32 architectures.
+.PARAMETER Version
+  The target Electron version (e.g., "6.0.7").
+#>
+param (
+  [Parameter(Mandatory=$true, HelpMessage="The Electron version to build against.")]
+  [string]$Version
+)
 
-if ($args.Length -ne 1) {
-  echo "Must Supply only 1 argument - Version"
-  return
+# Stop script on first error
+$ErrorActionPreference = "Stop"
+
+Write-Host "Building Electron Version -> $Version"
+
+$windows_archs = @("x64", "ia32", "arm64")
+
+foreach ($arch in $windows_archs) {
+  Write-Host "Building for Windows $arch..."
+  npx node-pre-gyp configure --target=$Version --arch=$arch --dist-url=https://electronjs.org/headers --module_name=node-printer --module_path=../lib/
+  npx node-pre-gyp build package --runtime=electron --target=$Version --target_arch=$arch --build-from-source
 }
 
-$version = $args[0]
-
-echo "Building Electron Version -> $version"
-
-# Build Electron Windows 64bit
-../node_modules\.bin\node-pre-gyp.cmd configure --target=$version --arch=x64 --dist-url=https://electronjs.org/headers --module_name=node_printer
-../node_modules\.bin\node-pre-gyp.cmd build package --runtime=electron --target=$version --target_arch=x64 --build-from-source
-
-# Build Electron Windows 32bit
-../node_modules\.bin\node-pre-gyp.cmd configure --target=$version --arch=ia32 --dist-url=https://electronjs.org/headers --module_name=node_printer
-../node_modules\.bin\node-pre-gyp.cmd build package --runtime=electron --target=$version --target_arch=ia32 --build-from-source
+Write-Host "Done."
