@@ -57,7 +57,7 @@ jobs:
       - name: Build Prebuilds
         run: |
           for arch in ${{ steps.archs.outputs.arch_list }}; do
-            npm run prebuild -- --strip --all --arch "$arch"
+            npm run prebuild -- --strip --arch "$arch"
           done
         shell: bash
 
