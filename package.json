@@ -1,7 +1,7 @@
 {
   "name": "@addble/node-printer",
   "description": "Node API (N-API) supported electron.s || node.js printer bindings",
-  "homepage": "https://github.com/addble/electron-printer",
+  "homepage": "https://github.com/addble/node-printer",
   "version": "3.0.0-RC1",
   "main": "./lib/index.js",
   "types": "types/index.d.ts",
@@ -32,12 +32,12 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/addble/electron-printer.git"
+    "url": "https://github.com/addble/node-printer.git"
   },
   "binary": {
     "module_name": "node-printer",
     "module_path": "./lib/binding/",
-    "host": "https://github.com/addble/electron-printer/releases/download/",
+    "host": "https://github.com/addble/node-printer/releases/download/",
     "remote_path": "v{version}"
   },
   "license": "MIT",

@@ -10,13 +10,13 @@ Supports following architectures:
 
 
 [![npm version](https://badge.fury.io/js/%40addble%2Fnode-printer.svg)](https://badge.fury.io/js/%40addble%2Fnode-printer)
-[![CI & Prebuilds](https://github.com/addble/electron-printer/actions/workflows/ci.yml/badge.svg)](https://github.com/addble/electron-printer/actions/workflows/ci.yml)
+[![CI & Prebuilds](https://github.com/addble/node-printer/actions/workflows/ci.yml/badge.svg)](https://github.com/addble/node-printer/actions/workflows/ci.yml)
 
 > Supports Node.js versions from 8.0.0 onwards, including the latest versions, thanks to the transition to N-API.
 
 > Prebuild and CI integration courtesy of @ekoeryanto in his [FORK](https://github.com/ekoeryanto/node-printer)
 
-If you have a problem, please find or create a new [GitHub issue](https://github.com/addble/electron-printer/issues).
+If you have a problem, please find or create a new [GitHub issue](https://github.com/addble/node-printer/issues).
 
 ### Supported Features
 
@@ -46,6 +46,7 @@ If you are using a version not covered by our pre-compiled binaries, the install
 ```
 npm install @addble/electron-printer
 
+```
 ___
 ### **Below is the original README**
 ___
