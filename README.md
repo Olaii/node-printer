@@ -44,7 +44,7 @@ If you are using a version not covered by our pre-compiled binaries, the install
 
 ### How to install:
 ```
-npm install @addble/electron-printer
+npm install @addble/node-printer
 
 ```
 ___
