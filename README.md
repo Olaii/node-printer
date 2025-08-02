@@ -31,6 +31,17 @@ If you have a problem, please find or create a new [GitHub issue](https://github
 * `printFile(options)` to print a file (POSIX only, e.g., macOS, Linux). Returns a Promise.
 * `getSupportedPrintFormats()` to get supported data formats like 'RAW' and 'TEXT'.
 
+### Pre-compiled Binaries
+
+This package ships with pre-compiled binaries for a wide range of Node.js and Electron versions on Windows, macOS, and Linux for various architectures.
+
+While N-API provides forward compatibility (meaning a binary built for an older version may work on a newer one), we provide pre-builds for these major versions to ensure a smooth installation experience without requiring a local compiler toolchain:
+
+*   **Node.js**: 16, 18, 20, 22
+*   **Electron**: 15, 19, 22, 25, 27, 28, 29, 30, 31
+
+If you are using a version not covered by our pre-compiled binaries, the installer will attempt to build the addon from source. This requires a proper C/C++ compiler toolchain to be installed on your system.
+
 ### How to install:
 ```
 npm install @addble/electron-printer
@@ -60,8 +71,6 @@ I was involved in a project where I needed to print from Node.js. This is the re
 * `getSupportedJobCommands()` to get supported job commands for `setJob()`, depending on the OS. The `'CANCEL'` command is supported on all OSes.
 
 
-```
-
 ### How to use:
 
 See examples
@@ -75,7 +84,6 @@ See examples
 * Thiago Lugli, @thiagoelg
 * Eko Eryanto, @ekoeryanto
 * Sudheer Gupta, @susheer
-* Yaikhomba Ningthemcha, @yaikhomba
 
 ### Project History:
 

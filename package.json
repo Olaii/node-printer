@@ -9,6 +9,9 @@
     "node-addon-api": "^8.2.1",
     "@mapbox/node-pre-gyp": "^2.0.0"
   },
+  "devDependencies": {
+    "node-pre-gyp-github": "^2.0.0"
+  },
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
     "rebuild": "node-gyp rebuild",
@@ -18,14 +21,14 @@
   },
 
   "author": {
-    "name": "Ion Lupascu",
-    "url": "http://program-support.co.uk/",
-    "email": "ionlupascu@gmail.com"
+    "name": "Yaikhomba Ningthemcha",
+    "url": "https://github.com/yaikhomba"
   },
   "contributors": [
     "Sudheer Gupta <sudheergupta0508@gmail.com>",
     "Thiago Lugli <thiagoelg@gmail.com>",
-    "Eko Eryanto <ekoeryanto@gmail.com>"
+    "Eko Eryanto <ekoeryanto@gmail.com>",
+    "Ion Lupascu <ionlupascu@gmail.com>"
   ],
   "repository": {
     "type": "git",
@@ -38,7 +41,14 @@
     "remote_path": "v{version}"
   },
   "license": "MIT",
-  "devDependencies": {
-    "node-pre-gyp-github": "^2.0.0"
-  }
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://opensource.org/licenses/MIT"
+    },
+    {
+      "type":"BSD-3-Clause",
+      "url": "https://opensource.org/licenses/BSD-3-Clause"
+    }
+  ]
 }

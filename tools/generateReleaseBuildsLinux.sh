@@ -21,6 +21,11 @@ declare -a node_versions=(
 )
 
 declare -a electron_versions=(
+  "15.3.5"
+  "19.1.9"
+  "22.3.27"
+  "25.9.8"
+  "27.3.11"
   "28.3.3"
   "29.4.0"
   "30.1.0"
