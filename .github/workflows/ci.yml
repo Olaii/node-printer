@@ -73,23 +73,30 @@ jobs:
     name: Publish Prebuilds
     needs: prebuild
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    # The job-level `if` is removed. The job will now run on pull requests,
+    # but the steps inside will be skipped. This allows the job to report a
+    # "success" status, which is useful if it's a required check for merging.
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        if: github.ref == 'refs/heads/main'
       - name: Setup Node.js
         uses: actions/setup-node@v4
+        if: github.ref == 'refs/heads/main'
         with:
           node-version: '18.x'
       - name: Install dependencies
+        if: github.ref == 'refs/heads/main'
         run: npm install
       - name: Download all artifacts
         uses: actions/download-artifact@v4
+        if: github.ref == 'refs/heads/main'
         with:
           path: prebuilds/
           pattern: prebuilds-*
           merge-multiple: true
       - name: Publish to GitHub Releases
+        if: github.ref == 'refs/heads/main'
         env:
           NODE_PRE_GYP_GITHUB_TOKEN: ${{ secrets.PREBUILD_TOKEN }}
         run: npm run release
