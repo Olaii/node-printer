@@ -12,7 +12,7 @@
   "scripts": {
     "install": "node-pre-gyp install --fallback-to-build",
     "rebuild": "node-gyp rebuild",
-    "prebuild": "node-pre-gyp prebuild",
+    "prebuild": "node-pre-gyp-github",
     "release": "node-pre-gyp-github publish --release",
     "test": "node --test test/"
   },

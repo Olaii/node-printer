@@ -39,29 +39,27 @@ jobs:
         with:
           platforms: arm,arm64
 
+      - name: Determine Architectures
+        id: archs
+        shell: bash
+        run: |
+          if [[ "${{ runner.os }}" == "Linux" ]]; then
+            echo "arch_list=ia32 x64 arm arm64" >> $GITHUB_OUTPUT
+          elif [[ "${{ runner.os }}" == "macOS" ]]; then
+            echo "arch_list=x64 arm64" >> $GITHUB_OUTPUT
+          elif [[ "${{ runner.os }}" == "Windows" ]]; then
+            echo "arch_list=ia32 x64 arm64" >> $GITHUB_OUTPUT
+          fi
+
       - name: Install dependencies
         run: npm install
 
-      - name: Build for Linux
-        if: runner.os == 'Linux'
+      - name: Build Prebuilds
         run: |
-          npm run prebuild -- --strip --all --arch ia32
-          npm run prebuild -- --strip --all --arch x64
-          npm run prebuild -- --strip --all --arch arm
-          npm run prebuild -- --strip --all --arch arm64
-
-      - name: Build for macOS
-        if: runner.os == 'macOS'
-        run: |
-          npm run prebuild -- --strip --all --arch x64
-          npm run prebuild -- --strip --all --arch arm64
-
-      - name: Build for Windows
-        if: runner.os == 'Windows'
-        run: |
-          npm run prebuild -- --strip --all --arch ia32
-          npm run prebuild -- --strip --all --arch x64
-          npm run prebuild -- --strip --all --arch arm64
+          for arch in ${{ steps.archs.outputs.arch_list }}; do
+            npm run prebuild -- --strip --all --arch "$arch"
+          done
+        shell: bash
 
       - name: Upload prebuilds artifact
         uses: actions/upload-artifact@v4
