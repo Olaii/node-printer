@@ -6,20 +6,14 @@
   "main": "./lib/index.js",
   "types": "types/index.d.ts",
   "dependencies": {
-    "node-addon-api": "^8.2.1",
-    "@mapbox/node-pre-gyp": "^2.0.0"
-  },
-  "devDependencies": {
-    "node-pre-gyp-github": "^2.0.0"
+    "@mapbox/node-pre-gyp": "^2.0.0",
+    "node-addon-api": "^8.2.1"
   },
   "scripts": {
-    "install": "node-pre-gyp install --fallback-to-build",
+    "install": "node-pre-gyp install",
     "rebuild": "node-gyp rebuild",
-    "prebuild": "node-pre-gyp build package",
-    "release": "node-pre-gyp-github publish --release",
-    "test": "node --test test/"
+    "prebuild": "node-pre-gyp build package"
   },
-
   "author": {
     "name": "Olaii",
     "url": "https://github.com/Olaii/"
@@ -41,7 +35,7 @@
       "url": "https://opensource.org/licenses/MIT"
     },
     {
-      "type":"BSD-3-Clause",
+      "type": "BSD-3-Clause",
       "url": "https://opensource.org/licenses/BSD-3-Clause"
     }
   ]
