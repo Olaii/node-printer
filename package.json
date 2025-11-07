@@ -25,7 +25,7 @@
   "binary": {
     "module_name": "node-printer",
     "module_path": "./lib/binding/",
-    "host": "https://github.com/Olaii/node-printerreleases/download/",
+    "host": "https://github.com/Olaii/node-printer/releases/download/",
     "remote_path": "v{version}"
   },
   "license": "MIT",
