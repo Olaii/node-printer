@@ -326,9 +326,9 @@ namespace{
 
     std::string parsePrinterInfo(const PRINTER_INFO_2W *printer, Napi::Object result_printer, PrinterHandle& iPrinterHandle) {
         Napi::Env env = result_printer.Env();
-        #define ADD_V8_STRING_PROPERTY(name, key) if((printer->##key != NULL) && (*printer->##key != L'\0'))    \
+        #define ADD_V8_STRING_PROPERTY(name, key) if((printer->key != NULL) && (*printer->key != L'\0'))    \
         {                                   \
-            result_printer.Set(Napi::String::New(result_printer.Env(), #name), Napi::String::New(result_printer.Env(), (char16_t*)printer->##key)); \
+            result_printer.Set(Napi::String::New(result_printer.Env(), #name), Napi::String::New(result_printer.Env(), (char16_t*)printer->key)); \
         }
         //LPTSTR               pPrinterName;
         ADD_V8_STRING_PROPERTY(name, pPrinterName)
