@@ -1,7 +1,7 @@
 {
   'variables': {
-    'module_name%': 'node-printer',
-    'module_path%': 'lib'
+    'module_name': 'node-printer',
+    'module_path': 'lib/binding/'
   },
   'targets': [
       {

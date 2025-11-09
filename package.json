@@ -12,7 +12,7 @@
   "scripts": {
     "install": "node-pre-gyp install",
     "rebuild": "node-gyp rebuild",
-    "prebuild": "node-pre-gyp build package"
+    "prebuild": "node-pre-gyp configure build package"
   },
   "author": {
     "name": "Olaii",
